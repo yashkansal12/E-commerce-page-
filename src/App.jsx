@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
@@ -9,21 +10,97 @@ import Shop from "./Pages/Shop";
 import Cart from "./Pages/Cart";
 
 function App() {
-  return (  
+
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+
+  const addToCart = (product) => {
+    setCart((previousCart) => {
+      const existingProduct = previousCart.find(
+        (item) => item.id === product.id
+      );
+      if (existingProduct) {
+        return previousCart.map((item) =>
+          item.id === product.id ? { 
+            ...item,
+            quantity: item.quantity + 1
+            }
+            : item
+        );
+      }
+      return [ ...previousCart,{
+          ...product,
+          quantity: 1
+        }];
+    });
+  };
+
+
+  const increaseQuantity = (id) => {
+    setCart((previousCart) =>
+      previousCart.map((item) =>
+        item.id === id
+          ? {
+            ...item,
+            quantity: item.quantity + 1
+          }
+          : item
+      ));
+  };
+
+  const decreaseQuantity = (id) => {
+    setCart((previousCart) =>
+      previousCart
+        .map((item) =>
+          item.id === id ? {
+              ...item,
+              quantity: item.quantity - 1
+            }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+
+  const removeFromCart = (id) => {
+    setCart((previousCart) =>
+      previousCart.filter(
+        (item) => item.id !== id
+      )
+    );
+  };
+
+  return (
 
     <>
-    <Navbar/>
+
+      <Navbar cartcount={cart.length} />
       <Routes>
-        
+
         <Route path="/home" element={<Home />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/cart" element={<Cart />} />
+        {/* <Route path="/shop" element={<Shop />} /> */}
+        <Route path="/shop" element= {<Shop addToCart={addToCart} />}/>
+        <Route path="/cart" element={<Cart 
+              cart={cart}
+              increaseQuantity={increaseQuantity}
+              decreaseQuantity={decreaseQuantity}
+              removeFromCart={removeFromCart}
+            />} />
 
       </Routes>
-      <Footer/>
+      <Footer />
 
     </>
-   
+
   );
 }
 

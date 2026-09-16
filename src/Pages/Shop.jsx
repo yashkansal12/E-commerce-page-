@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function Shop() {
+function Shop({addToCart}) {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,7 +23,7 @@ function Shop() {
 
   return (
     <section className="shop">
-      <h1>Shop</h1>
+      <h1>Our Products</h1>
 
       <div className="products">
         {products.map((product) => (
@@ -43,7 +43,8 @@ function Shop() {
                 ${product.price}
               </p>
 
-              <button className="cart-btn">
+              <button className="cart-btn"
+              onClick={() => addToCart(product)}>
                 Add to Cart
               </button>
             </div>

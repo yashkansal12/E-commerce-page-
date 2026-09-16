@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar({cartCount}) {
   return (
     <header className="header">
       <nav className="navbar">
@@ -19,12 +19,15 @@ function Navbar() {
         </div>
 
         <div className="nav-links">
-          <Link to="/home">Home</Link>
+          {/* <Link to="/home">Home</Link> */}
           <Link to="/shop">Shop</Link>
 
           <Link to="/cart">
             <i className="fa-solid fa-cart-shopping"></i>
             Cart
+            <span className="cart-count">
+              {cartCount}
+            </span>
           </Link>
 
         </div>
