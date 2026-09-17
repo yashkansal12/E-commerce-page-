@@ -27,19 +27,22 @@ function App() {
       const existingProduct = previousCart.find(
         (item) => item.id === product.id
       );
+      alert(`${product.title}\nAdded to cart`);
       if (existingProduct) {
+        const newQuantity = existingProduct.quantity + 1;
+
         return previousCart.map((item) =>
-          item.id === product.id ? { 
+          item.id === product.id ? {
             ...item,
             quantity: item.quantity + 1
-            }
+          }
             : item
         );
       }
-      return [ ...previousCart,{
-          ...product,
-          quantity: 1
-        }];
+      return [...previousCart, {
+        ...product,
+        quantity: 1
+      }];
     });
   };
 
@@ -61,9 +64,9 @@ function App() {
       previousCart
         .map((item) =>
           item.id === id ? {
-              ...item,
-              quantity: item.quantity - 1
-            }
+            ...item,
+            quantity: item.quantity - 1
+          }
             : item
         )
         .filter((item) => item.quantity > 0)
@@ -77,24 +80,25 @@ function App() {
         (item) => item.id !== id
       )
     );
+    alert("Product remove from cart!");
   };
 
   return (
 
     <>
 
-      <Navbar cartcount={cart.length} />
+      <Navbar cartCount={cart.length} />
       <Routes>
 
         <Route path="/home" element={<Home />} />
         {/* <Route path="/shop" element={<Shop />} /> */}
-        <Route path="/shop" element= {<Shop addToCart={addToCart} />}/>
-        <Route path="/cart" element={<Cart 
-              cart={cart}
-              increaseQuantity={increaseQuantity}
-              decreaseQuantity={decreaseQuantity}
-              removeFromCart={removeFromCart}
-            />} />
+        <Route path="/shop" element={<Shop addToCart={addToCart} />} />
+        <Route path="/cart" element={<Cart
+          cart={cart}
+          increaseQuantity={increaseQuantity}
+          decreaseQuantity={decreaseQuantity}
+          removeFromCart={removeFromCart}
+        />} />
 
       </Routes>
       <Footer />

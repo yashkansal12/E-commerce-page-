@@ -10,13 +10,13 @@ function Navbar({cartCount}) {
         </div>
 
 
-        <div className="search-box">
+        {/* <div className="search-box">
           <input type="text"placeholder="Search products..."/>
 
           <button>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
-        </div>
+        </div> */}
 
         <div className="nav-links">
           {/* <Link to="/home">Home</Link> */}
