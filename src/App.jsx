@@ -91,7 +91,7 @@ function App() {
       <Routes>
 
         {/* <Route path="/home" element={<Home />} /> */}
-        /* {/* <Route path="/shop" element={<Shop />} /> */} */
+        <Route path="/shop" element={<Shop />} />  
         <Route path="/" element={<Shop addToCart={addToCart} />} />
         <Route path="/cart" element={<Cart
           cart={cart}
