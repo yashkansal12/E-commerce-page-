@@ -335,7 +335,11 @@ img {
 
 
 .cart {
+<<<<<<< HEAD
   width: 100%;
+=======
+  width : 100%;
+>>>>>>> 08e18a949d3814621d2362492ad427627e6992d2
   max-width: 1100px;
   margin: 0 auto;
   padding: 32px 24px 60px;
