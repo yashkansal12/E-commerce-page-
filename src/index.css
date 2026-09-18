@@ -55,11 +55,7 @@ body {
 }
 
 #root {
-<<<<<<< HEAD
   /* width: 1126px; */
-=======
-  width: 100%;
->>>>>>> 08e18a949d3814621d2362492ad427627e6992d2
   max-width: 100%;
   margin: 0 auto;
   /* text-align: center; */
